@@ -4,6 +4,11 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>ConnectionManager.h</itemPath>
+      <itemPath>EventDispacher.h</itemPath>
+      <itemPath>PacketDispacher.h</itemPath>
+      <itemPath>PacketObserver.h</itemPath>
+      <itemPath>ServerManager.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -12,6 +17,11 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>ConnectionManager.cpp</itemPath>
+      <itemPath>EventDispacher.cpp</itemPath>
+      <itemPath>PacketDispacher.cpp</itemPath>
+      <itemPath>PacketObserver.cpp</itemPath>
+      <itemPath>ServerManager.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -31,7 +41,7 @@
     <conf name="Debug" type="1">
       <toolsSet>
         <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
-        <compilerSet>default</compilerSet>
+        <compilerSet>GNU|GNU</compilerSet>
       </toolsSet>
       <compileType>
       </compileType>

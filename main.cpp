@@ -1,19 +1,22 @@
 /* 
  * File:   main.cpp
- * Author: catchers
+ * Author: Michał Łapacz
  *
  * Created on February 26, 2013, 9:54 PM
  */
 
-#include <cstdlib>
-
 using namespace std;
 
-/*
- * 
- */
-int main(int argc, char** argv) {
+#include "ServerManager.h"
+#include "EventDispacher.h"
+
+int main(void)
+{
+    ServerManager server;
+    EventDispacher eventDisp;
+    server.AddEventDispacher(&eventDisp);
+    
+    server.StartServer();
 
     return 0;
 }
-
