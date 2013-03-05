@@ -18,7 +18,7 @@ public:
     void DataReceived(char* data);
     void SendData(char* data);
 private:
-    enum MESSAGE {
+    enum {
         LOGIN,
         LOGOUT,
         
@@ -27,7 +27,7 @@ private:
     MessageHandler();
     MessageHandler(const MessageHandler& orig);
     
-//    Message** MESSAGES = new Message*[NO_OF_MESSAGES];
+    Message** MESSAGES;
 };
 
 #endif	/* MESSAGEHANDLER_H */
