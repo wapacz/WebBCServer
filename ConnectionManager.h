@@ -1,6 +1,6 @@
 /* 
  * File:   ConnectionManager.h
- * Author: catchers
+ * Author: Michał Łapacz
  *
  * Created on February 27, 2013, 8:46 PM
  */
@@ -19,9 +19,13 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-#define MYPORT "4950"    // the port users will be connecting to
+//#define MYPORT "4950"    // the port users will be connecting to
 #define MAXBUFLEN 100
 
+/**
+ * ConnectionManager
+ * - Used for handle connections
+ */
 class ConnectionManager {
     int sockfd;
     struct addrinfo hints;
@@ -30,8 +34,12 @@ class ConnectionManager {
     ConnectionManager(const ConnectionManager& orig);
     ConnectionManager& operator=(const ConnectionManager&);
 public:
+    enum ConnectionType {
+        TCP,
+        UDP
+    };
     virtual ~ConnectionManager();
-    void StartListening();
+    void StartListening(const char* port, enum ConnectionType type);
     static ConnectionManager& GetInstance();
 };
 

@@ -1,14 +1,84 @@
 /* 
  * File:   ConnectionManager.cpp
- * Author: catchers
+ * Author: Michał Łapacz
  * 
  * Created on February 27, 2013, 8:46 PM
  */
 
 #include "ConnectionManager.h"
+#include "MessageHandler.h"
 
 ConnectionManager::ConnectionManager() {
+//        
+//    struct addrinfo *servinfo, *p;
+//    int rv;
+//    
+//    memset(&(this->hints), 0, sizeof(this->hints));
+//    this->hints.ai_family = AF_UNSPEC; // set to AF_INET to force IPv4
+//    this->hints.ai_socktype = SOCK_DGRAM;
+//    this->hints.ai_flags = AI_PASSIVE; // use my IP
+//    
+//    if (rv = getaddrinfo(NULL, port, &(this->hints), &servinfo) != 0) {
+//        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
+//        return;// 1;
+//    }
+//    
+//    // loop through all the results and bind to the first we can
+//    for(p = servinfo; p != NULL; p = p->ai_next) {
+//        if ((this->sockfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1) {
+//            perror("listener: socket");
+//            continue;
+//        }
+//
+//        if (bind(sockfd, p->ai_addr, p->ai_addrlen) == -1) {
+//            close(sockfd);
+//            perror("listener: bind");
+//            continue;
+//        }
+//
+//        break;
+//    }
+//
+//    if (p == NULL) {
+//        fprintf(stderr, "listener: failed to bind socket\n");
+//        return;// 2;
+//    }
+//
+//    freeaddrinfo(servinfo); 
+}
+
+ConnectionManager::ConnectionManager(const ConnectionManager& orig) {
+}
+
+ConnectionManager::~ConnectionManager() {
+    close(this->sockfd);
+}
+
+ConnectionManager& ConnectionManager::GetInstance() {
+    static ConnectionManager instance;
+    return instance;
+}
+
+// get sockaddr, IPv4 or IPv6:
+void* ConnectionManager::get_in_addr(struct sockaddr *sa)
+{
+    if (sa->sa_family == AF_INET) {
+        return &(((struct sockaddr_in*)sa)->sin_addr);
+    }
+
+    return &(((struct sockaddr_in6*)sa)->sin6_addr);
+}
+
+void ConnectionManager::StartListening(const char* port, enum ConnectionType type) {
         
+    socklen_t addrLen;
+    int numbytes;
+    struct sockaddr_storage srcAddr;
+    char s[INET6_ADDRSTRLEN];
+    char buf[MAXBUFLEN];
+    
+    
+            
     struct addrinfo *servinfo, *p;
     int rv;
     
@@ -17,7 +87,7 @@ ConnectionManager::ConnectionManager() {
     this->hints.ai_socktype = SOCK_DGRAM;
     this->hints.ai_flags = AI_PASSIVE; // use my IP
     
-    if (rv = getaddrinfo(NULL, MYPORT, &(this->hints), &servinfo) != 0) {
+    if (rv = getaddrinfo(NULL, port, &(this->hints), &servinfo) != 0) {
         fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
         return;// 1;
     }
@@ -44,37 +114,9 @@ ConnectionManager::ConnectionManager() {
     }
 
     freeaddrinfo(servinfo); 
-}
-
-ConnectionManager::ConnectionManager(const ConnectionManager& orig) {
-}
-
-ConnectionManager::~ConnectionManager() {
-    close(this->sockfd);
-}
-
-ConnectionManager& ConnectionManager::GetInstance() {
-    static ConnectionManager instance;
-    return instance;
-}
-
-// get sockaddr, IPv4 or IPv6:
-void* ConnectionManager::get_in_addr(struct sockaddr *sa)
-{
-    if (sa->sa_family == AF_INET) {
-        return &(((struct sockaddr_in*)sa)->sin_addr);
-    }
-
-    return &(((struct sockaddr_in6*)sa)->sin6_addr);
-}
-
-void ConnectionManager::StartListening() {
-        
-    socklen_t addrLen;
-    int numbytes;
-    struct sockaddr_storage srcAddr;
-    char s[INET6_ADDRSTRLEN];
-    char buf[MAXBUFLEN];
+    
+    
+    
     
     while(1)
     {
@@ -92,5 +134,7 @@ void ConnectionManager::StartListening() {
         printf("listener: packet is %d bytes long\n", numbytes);
         buf[numbytes] = '\0';
         printf("listener: packet contains \"%s\"\n", buf);
+        
+        MessageHandler::GetInstance().DataReceived(buf);
     }    
 }

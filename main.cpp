@@ -9,14 +9,11 @@ using namespace std;
 
 #include "ServerManager.h"
 #include "EventDispacher.h"
+#include "MessageHandler.h"
 
 int main(void)
 {
-    ServerManager server;
-    EventDispacher eventDisp;
-    server.AddEventDispacher(&eventDisp);
-    
-    server.StartServer();
+    ServerManager::GetInstance().StartServer();
 
     return 0;
 }

@@ -1,6 +1,6 @@
 /* 
  * File:   PacketObserver.cpp
- * Author: catchers
+ * Author: Michał Łapacz
  * 
  * Created on February 27, 2013, 1:50 AM
  */

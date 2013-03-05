@@ -6,6 +6,9 @@
                    projectFiles="true">
       <itemPath>ConnectionManager.h</itemPath>
       <itemPath>EventDispacher.h</itemPath>
+      <itemPath>LoginMessage.h</itemPath>
+      <itemPath>Message.h</itemPath>
+      <itemPath>MessageHandler.h</itemPath>
       <itemPath>PacketDispacher.h</itemPath>
       <itemPath>PacketObserver.h</itemPath>
       <itemPath>ServerManager.h</itemPath>
@@ -19,6 +22,9 @@
                    projectFiles="true">
       <itemPath>ConnectionManager.cpp</itemPath>
       <itemPath>EventDispacher.cpp</itemPath>
+      <itemPath>LoginMessage.cpp</itemPath>
+      <itemPath>Message.cpp</itemPath>
+      <itemPath>MessageHandler.cpp</itemPath>
       <itemPath>PacketDispacher.cpp</itemPath>
       <itemPath>PacketObserver.cpp</itemPath>
       <itemPath>ServerManager.cpp</itemPath>

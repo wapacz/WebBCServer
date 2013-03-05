@@ -1,6 +1,6 @@
 /* 
  * File:   EventDispacher.h
- * Author: catchers
+ * Author: Michał Łapacz
  *
  * Created on February 27, 2013, 12:27 AM
  */

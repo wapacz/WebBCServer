@@ -1,6 +1,6 @@
 /* 
  * File:   PacketDispacher.cpp
- * Author: catchers
+ * Author: Michał Łapacz
  * 
  * Created on February 26, 2013, 9:58 PM
  */

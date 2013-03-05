@@ -1,6 +1,6 @@
 /* 
  * File:   ServerManager.h
- * Author: catchers
+ * Author: Michał Łapacz
  *
  * Created on February 26, 2013, 10:00 PM
  */
@@ -13,14 +13,17 @@
 #include "ConnectionManager.h"
 
 class ServerManager {
-    EventDispacher* eventDispacher;
-public:
     ServerManager();
     ServerManager(const ServerManager& orig);
+    ServerManager& operator=(const ServerManager&);
+public:
     virtual ~ServerManager();
     void AddEventDispacher(EventDispacher* eventDispacher);
     void StartServer();
     ConnectionManager& GetConnectionManager();
+    static ServerManager& GetInstance();
+    
+
 };
 
 #endif	/* CONNECTIONMANAGER_H */
